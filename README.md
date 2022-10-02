@@ -84,7 +84,7 @@ $ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrS
 
 ## 8. インフラを構築する
 ### 1. サーバーimageを用意する。
-- 以降のインフラ構築の作業を進めるためには、awsのECR上にサーバーimageが存在することが前提となりますので、まずは[こちら](https://github.com/yokohama/kickstart-server)のiサーバーimageのアップロードの作業を完了させて、指示通りにこちらに戻ってきてください。
+- 以降のインフラ構築の作業を進めるためには、awsのECR上にサーバーimageが存在することが前提となりますので、まずは[こちら](https://github.com/yokohama/kickstart-server)のサーバーimageのアップロードの作業を完了させて、指示通りにこちらに戻ってきてください。
 
 <a id='kickstart-cdk-8-2' />
 
