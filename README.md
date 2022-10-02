@@ -14,7 +14,9 @@
 前提として[こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
 
 ## 2. リポジトリをforkする
-### 1. githubからforkする。fork先名は解りやすく同じ名前にして下さい。もし変更する場合は、以降`kickstart-cdk`を`変更した名前`に読み替えて作業をおこなって下さい。
+### 1. githubからforkする。
+fork先名は解りやすく同じ名前にして下さい。もし変更する場合は、以降`kickstart-cdk`を`変更した名前`に読み替えて作業をおこなって下さい。
+
 ### 2. forkした先のリポジトリに、`development`ブランチを作成して下さい。
 
 ## 3. FirebaseのプロジェクトIDの確認
