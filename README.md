@@ -55,18 +55,14 @@ $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk bootstrap
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk ls
 EcrStack-local
 KickstartStack-local
-
-#
-# local / dev / prod 環境に、ECRのリポジトリの作成
-#
-
-# local(aws上)
-$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
-したプロジェクトID＞ cdk deploy EcrStack-prod
 ```
 
 ## 5. local（aws上）にインフラをデプロイ
 ```
+
+# local(aws上)のECRにリポジトリを作成
+$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
+
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
