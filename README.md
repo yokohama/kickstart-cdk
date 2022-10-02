@@ -69,7 +69,8 @@ $ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ 
 $ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-prod
 
 ```
-server でimageをプッシュしてから
+
+TODO: server でimageをプッシュしてから
 ```
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
