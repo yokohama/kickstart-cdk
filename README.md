@@ -67,15 +67,16 @@ KickstartStack-local
 ```
 
 ## 7. aws上にECRのリポジトリ( local / dev / prod )作成
+- プロジェクトIDは[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認
 ```
 # local(aws上)のECRにリポジトリを作成
-$ FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-local
+$ FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrStack-local
 
 # dev(aws上)のECRにリポジトリを作成
-$ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-dev
+$ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrStack-dev
 
 # prod(aws上)のECRにリポジトリを作成
-$ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-prod
+$ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrStack-prod
 
 ```
 
