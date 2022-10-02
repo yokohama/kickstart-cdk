@@ -18,9 +18,9 @@
 
 | 変数名 | 参照名 |
 | :--- | :--- |
-| AWS_ACCESS_KEY_ID |  |
-| AWS_SECRET_ACCESS_KEY |  |
-| AWS_REGION |  |
+| AWS_ACCESS_KEY_ID | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
+| AWS_SECRET_ACCESS_KEY | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
+| AWS_REGION | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
 | FIREBASE_PROJECT_ID | [こちら](https://github.com/yokohama/kickstart-front/blob/development/README.md#kickstart-front-3-1) |
 
 
