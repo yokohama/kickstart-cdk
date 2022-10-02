@@ -89,7 +89,8 @@ $ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrS
 <a id='kickstart-cdk-8-2' />
 
 ### 2. インフラを構築する
+- プロジェクトIDは[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認
 ```
-$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
+$ FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
