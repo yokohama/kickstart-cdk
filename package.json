@@ -1,8 +1,8 @@
 {
-  "name": "next-startup-cdk",
+  "name": "kickstart-cdk",
   "version": "0.1.0",
   "bin": {
-    "next-startup-cdk": "bin/next-startup-cdk.js"
+    "kickstart-cdk": "bin/kickstart-cdk.js"
   },
   "scripts": {
     "build": "tsc",

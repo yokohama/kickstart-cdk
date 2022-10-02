@@ -5,7 +5,7 @@ import * as cdk from 'aws-cdk-lib';
 import { TargetEnvType, RailsEnvType } from '../lib/types/TargetEnvType';
 
 import { EcrStack } from '../lib/ecr-stack';
-import { NextStartupStack } from '../lib/next-startup-stack';
+import { KickstartStack } from '../lib/kickstart-stack';
 
 let targetEnv :TargetEnvType = 'local'
 let dbUser :string = 'db_user'
@@ -34,7 +34,7 @@ const app = new cdk.App();
 const repository = new EcrStack(app, `EcrStack-${targetEnv}`, targetEnv)
 
 // cdk ls
-new NextStartupStack(app, `NextStartupStack-${targetEnv}`, {
+new KickstartStack(app, `KickstartStack-${targetEnv}`, {
   targetEnv, 
   railsEnv, 
   repository: repository.repo,

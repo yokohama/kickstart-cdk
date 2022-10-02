@@ -1,5 +1,5 @@
 {
-  "app": "npx ts-node --prefer-ts-exts bin/next-startup-cdk.ts",
+  "app": "npx ts-node --prefer-ts-exts bin/kickstart-cdk.ts",
   "watch": {
     "include": [
       "**"
