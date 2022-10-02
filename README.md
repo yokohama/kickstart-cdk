@@ -106,6 +106,6 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy Kick
 ```
 
 ## 9. APIの定義をデプロイする
-- このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)で、デプロイまで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
+- このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)でデプロイまで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
 
 - [kickstart-cdk](https://github.com/yokohama/kickstart-api)から来た方は、[APIのデプロイ](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻りデプロイを完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
