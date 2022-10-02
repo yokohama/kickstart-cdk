@@ -16,12 +16,21 @@
 
 ## 3. github actionsのsecretsの登録
 
+### 1. Secretsの登録画面を開く
+<img src="https://user-images.githubusercontent.com/1023421/193443783-c0d0a453-1b85-4d82-b30a-6068658a21d7.png" width="400">
+
+<img src="https://user-images.githubusercontent.com/1023421/193443820-4288a0f3-10ed-4bfa-824e-e80916ff38a8.png" width="400">
+
+### 2. 以下の内容で変数を入力する
 | 変数名 | 参照名 |
 | :--- | :--- |
 | AWS_ACCESS_KEY_ID | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
 | AWS_SECRET_ACCESS_KEY | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
 | AWS_REGION | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
 | FIREBASE_PROJECT_ID | [こちら](https://github.com/yokohama/kickstart-front/blob/development/README.md#kickstart-front-3-1) |
+
+
+
 
 
 ## 3. ローカル開発環境の構築
