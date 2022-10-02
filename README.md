@@ -57,12 +57,20 @@ EcrStack-local
 KickstartStack-local
 ```
 
-## 5. local（aws上）にインフラをデプロイ
+## 5. aws上にECRのリポジトリ( local / dev / prod )作成
 ```
-
 # local(aws上)のECRにリポジトリを作成
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
 
+# dev(aws上)のECRにリポジトリを作成
+$ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-dev
+
+# prod(aws上)のECRにリポジトリを作成
+$ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-prod
+
+```
+server でimageをプッシュしてから
+```
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
