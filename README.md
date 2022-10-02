@@ -2,22 +2,28 @@
 
 ## 目次
 1. 前提
-2. FirebaseのプロジェクトIDの確認
-3. github actionsのsecretesの登録
-4. local環境（aws上）の環境構築
-5. local（aws上）にインフラをデプロイ
-6. インフラ変更のデプロイ
+2. リポジトリをforkする
+3. FirebaseのプロジェクトIDの確認
+4. github actionsのsecretesの登録
+5. ローカル開発環境の構築
+6. CDKの初期化
+7. aws上にECRのリポジトリ( local / dev / prod )作成
+8. インフラ変更のデプロイ
 
 ## 1. 前提
 前提として[こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
 
-## 2. FirebaseのプロジェクトIDの確認
+## 2. リポジトリをforkする
+### 1. githubからforkする。fork先名は解りやすく同じ名前にして下さい。もし変更する場合は、以降`kickstart-cdk`を`変更した名前`に読み替えて作業をおこなって下さい。
+### 2. forkした先のリポジトリに、`development`ブランチを作成して下さい。
+
+## 3. FirebaseのプロジェクトIDの確認
 - kickstart-frontを構築していない方は先に、[こちら](https://github.com/yokohama/kickstart-front)でフロントの構築をしてください。
 - 既にフロントの構築をされている方も、[こちら](https://github.com/yokohama/kickstart-front/blob/development/README.md#kickstart-front-3-1)で確認をして控えておいてくだい。
 
 <img src="https://user-images.githubusercontent.com/1023421/193443389-b613c4b2-2148-4210-8c4b-f6515a4222b3.png" width="400">
 
-## 3. github actionsのsecretsの登録
+## 4. github actionsのsecretsの登録
 
 ### 1. Secretsの登録画面を開く
 <img src="https://user-images.githubusercontent.com/1023421/193443783-c0d0a453-1b85-4d82-b30a-6068658a21d7.png" width="400">
@@ -34,7 +40,7 @@
 
 <img src="https://user-images.githubusercontent.com/1023421/193444810-92fcf0af-ae76-48bd-a408-b4019db6d1b9.png" width="400">
 
-## 3. ローカル開発環境の構築
+## 5. ローカル開発環境の構築
 ```
 $ cd ./kickstart-cdk
 $ yarn
@@ -43,7 +49,7 @@ $ cdk --verion
 2.44.0 (build bf32cb1)
 ```
 
-## 4. local環境（aws上）の環境構築
+## 6. CDKの初期化
 ```
 # cloud formationのスタックの初期化
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk bootstrap
@@ -57,7 +63,7 @@ EcrStack-local
 KickstartStack-local
 ```
 
-## 5. aws上にECRのリポジトリ( local / dev / prod )作成
+## 7. aws上にECRのリポジトリ( local / dev / prod )作成
 ```
 # local(aws上)のECRにリポジトリを作成
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
@@ -76,4 +82,4 @@ $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy Kick
 # (y/n)と聞いてくるので、yを選択。
 ```
 
-## 6. インフラ変更のデプロイ
+## 8. インフラ変更のデプロイ
