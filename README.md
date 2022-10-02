@@ -91,6 +91,15 @@ $ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy EcrS
 ### 2. インフラを構築する
 - プロジェクトIDは[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認
 ```
+# awsのlocal環境にインフラを構築
 $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ cdk deploy KickstartStack-local
+# (y/n)と聞いてくるので、yを選択。
+
+# awsのdev環境にインフラを構築
+$ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=dev cdk deploy KickstartStack-dev
+# (y/n)と聞いてくるので、yを選択。
+
+# awsのprod環境にインフラを構築
+$ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy KickstartStack-prod
 # (y/n)と聞いてくるので、yを選択。
 ```
