@@ -16,6 +16,13 @@
 
 ## 3. github actionsのsecretsの登録
 
+| 変数名 | 参照名 |
+| :--- | :--- |
+| AWS_ACCESS_KEY_ID |  |
+| AWS_SECRET_ACCESS_KEY |  |
+| AWS_REGION |  |
+| FIREBASE_PROJECT_ID | [こちら](https://github.com/yokohama/kickstart-front/blob/development/README.md#kickstart-front-3-1) |
+
 
 ## 3. ローカル開発環境の構築
 ```
