@@ -24,14 +24,6 @@ export class KickstartStack extends cdk.Stack {
     
     const rdsDeleteAutomatedBackups = props.targetEnv == ('local' || 'dev')
     
-    // ECR
-    /*
-    const repository = new ecr.Repository(this, 'Ecr', {
-      repositoryName: `ecr-${props.targetEnv}`,
-      imageScanOnPush: true,
-    });
-    */
-    
     // VPC
     this.vpc = new ec2.Vpc(this, 'Vpc', {
       cidr: props.vpcSubnet,
