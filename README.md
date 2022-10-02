@@ -8,10 +8,11 @@
 5. ローカル開発環境の構築
 6. CDKの初期化
 7. aws上にECRのリポジトリ( local / dev / prod )作成
-8. インフラ変更のデプロイ
+8. インフラ変更を構築する
 
 ## 1. 前提
-前提として[こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
+- [こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
+- [こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で、firebaseの`projectId`を取得している必要が有ります。
 
 ## 2. リポジトリをforkする
 ### 1. githubからforkする。
@@ -68,24 +69,26 @@ KickstartStack-local
 ## 7. aws上にECRのリポジトリ( local / dev / prod )作成
 ```
 # local(aws上)のECRにリポジトリを作成
-$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
+$ FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-local
 
 # dev(aws上)のECRにリポジトリを作成
-$ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-dev
+$ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-dev
 
 # prod(aws上)のECRにリポジトリを作成
-$ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-prod
+$ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜[こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で確認したプロジェクトID＞ cdk deploy EcrStack-prod
 
 ```
+
 <a id='kickstart-cdk-8' />
-## 8. インフラ構築
 
+## 8. インフラを構築する
+### 1. サーバーimageを用意する。
+- 以降のインフラ構築の作業を進めるためには、awsのECR上にサーバーimageが存在することが前提となりますので、まずは[こちら](https://github.com/yokohama/kickstart-server)のiサーバーmageのアップロードの作業を完了させて、指示通りにこちらに戻ってきてください。
 
-TODO: server でimageをプッシュしてから
+<a id='kickstart-cdk-8-2' />
+
+### 2. インフラを構築する
 ```
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
-
-## 8. インフラ変更のデプロイ
-- 以降のインフラ構築の作業を進めるためには、awsのECR上にサーバーimageが存在することが前提となりますので、まずは[こちら](https://github.com/yokohama/kickstart-server)のiサーバーmageのアップロードの作業を完了させて、指示通りにこちらに戻ってきてください。
