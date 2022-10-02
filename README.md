@@ -77,6 +77,9 @@ $ TARGET_ENV=dev FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ 
 $ TARGET_ENV=prod FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-prod
 
 ```
+<a id='kickstart-cdk-8' />
+## 8. インフラ構築
+
 
 TODO: server でimageをプッシュしてから
 ```
