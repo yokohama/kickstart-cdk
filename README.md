@@ -4,6 +4,9 @@
 1. 前提
 2. FirebaseのプロジェクトIDの確認
 3. github actionsのsecretesの登録
+4. local環境（aws上）の環境構築
+5. local（aws上）にインフラをデプロイ
+6. インフラ変更のデプロイ
 
 ## 1. 前提
 前提として[こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
@@ -40,7 +43,7 @@ $ cdk --verion
 2.44.0 (build bf32cb1)
 ```
 
-## 3. local環境（aws上）の環境構築
+## 4. local環境（aws上）の環境構築
 ```
 # cloud formationのスタックの初期化
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk bootstrap
@@ -62,8 +65,10 @@ $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrS
 したプロジェクトID＞ cdk deploy EcrStack-prod
 ```
 
-### 4. local（aws上）にインフラをデプロイ
+## 5. local（aws上）にインフラをデプロイ
 ```
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
+
+## 6. インフラ変更のデプロイ
