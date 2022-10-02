@@ -42,5 +42,28 @@ $ cdk --verion
 
 ## 3. local環境（aws上）の環境構築
 ```
+# cloud formationのスタックの初期化
+$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk bootstrap
+
+#
+# cloud formationのlocalスタックの確認
+#
+
 $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk ls
+EcrStack-local
+KickstartStack-local
+
+#
+# local / dev / prod 環境に、ECRのリポジトリの作成
+#
+
+# local(aws上)
+$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrStack-local
+したプロジェクトID＞ cdk deploy EcrStack-prod
+```
+
+### 4. local（aws上）にインフラをデプロイ
+```
+$ FIREBASE_PROJECT_ID=kickstart-1ce52 cdk deploy KickstartStack-local
+# (y/n)と聞いてくるので、yを選択。
 ```
