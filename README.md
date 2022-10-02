@@ -88,3 +88,4 @@ $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy Kick
 ```
 
 ## 8. インフラ変更のデプロイ
+- 以降のインフラ構築の作業を進めるためには、awsのECR上にサーバーimageが存在することが前提となりますので、まずは[こちら](https://github.com/yokohama/kickstart-server)のiサーバーmageのアップロードの作業を完了させて、指示通りにこちらに戻ってきてください。
