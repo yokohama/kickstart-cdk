@@ -64,6 +64,6 @@ $ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy EcrS
 
 ### 4. local（aws上）にインフラをデプロイ
 ```
-$ FIREBASE_PROJECT_ID=kickstart-1ce52 cdk deploy KickstartStack-local
+$ FIREBASE_PROJECT_ID=＜2で確認したプロジェクトID＞ cdk deploy KickstartStack-local
 # (y/n)と聞いてくるので、yを選択。
 ```
