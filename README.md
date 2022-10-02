@@ -29,9 +29,7 @@
 | AWS_REGION | [こちら](https://github.com/yokohama/kickstart/blob/main/README.md#kickstart-1-11) |
 | FIREBASE_PROJECT_ID | [こちら](https://github.com/yokohama/kickstart-front/blob/development/README.md#kickstart-front-3-1) |
 
-
-
-
+<img src="https://user-images.githubusercontent.com/1023421/193444810-92fcf0af-ae76-48bd-a408-b4019db6d1b9.png" width="400">
 
 ## 3. ローカル開発環境の構築
 ```
