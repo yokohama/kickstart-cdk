@@ -9,6 +9,7 @@
 6. CDKの初期化
 7. aws上にECRのリポジトリ( local / dev / prod )作成
 8. インフラ変更を構築する
+9. APIの定義をデプロイする
 
 ## 1. 前提
 - [こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
@@ -103,3 +104,8 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=dev cdk deploy Kicks
 $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy KickstartStack-prod
 # (y/n)と聞いてくるので、yを選択。
 ```
+
+## 9. APIの定義をデプロイする
+- このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)で、デプロイまで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
+
+- [kickstart-cdk](https://github.com/yokohama/kickstart-api)から来た方は、[APIのデプロイ](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻りデプロイを完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
