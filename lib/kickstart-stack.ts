@@ -107,6 +107,7 @@ export class KickstartStack extends cdk.Stack {
         RAILS_LOG_TO_STDOUT: 'true',
         DATABASE_HOST: postgresql.instanceEndpoint.hostname,
         DATABASE_NAME: props.dbName,
+        DATABASE_NAME_PRODUCTION: props.dbName,
         DATABASE_USER: props.dbUser,
         FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID!
       },
