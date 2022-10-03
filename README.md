@@ -15,6 +15,13 @@
 - [こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
 - [こちら](https://github.com/yokohama/kickstart-front#kickstart-front-3-1)で、firebaseの`projectId`を取得している必要が有ります。
 
+- このチュートリアルでは新たに以下の編集を取得します。
+| 参照名 | 使用箇所 | 取得方法 | ステータス |
+| :--- | :--- | :--- | :--- |
+| local APIGateway endpoint URL | front | awsコンソール / api gateway / state / prod |  |
+| dev APIGateway endpoint URL | front | awsコンソール / api gateway / state / prod |  |
+| prod APIGateway endpoint URL | front | awsコンソール / api gateway / state / prod |  |
+
 ## 2. リポジトリをforkする
 ### 1. githubからforkする。
 fork先名は解りやすく同じ名前にして下さい。もし変更する場合は、以降`kickstart-cdk`を`変更した名前`に読み替えて作業をおこなって下さい。
@@ -104,6 +111,9 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=dev cdk deploy Kicks
 $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy KickstartStack-prod
 # (y/n)と聞いてくるので、yを選択。
 ```
+
+- 成功するとこんな感じになります。
+<img src="https://user-images.githubusercontent.com/1023421/193505698-0176358c-fc48-40ae-9d7c-c861bd7cfb97.png" width="400" />
 
 ## 9. API Gatewayの初期化
 - このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)でAPI Gatewayの初期化まで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
