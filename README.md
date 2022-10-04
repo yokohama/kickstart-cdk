@@ -312,3 +312,8 @@ index af9ebe8..4d90f2f 100644
 
 ### 13. 変更をaws上のprodにデプロイする
 - [10-8](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-8)を参照
+
+### 14. 全て空になっていることを確認
+```
+$ aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
+```
