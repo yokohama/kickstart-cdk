@@ -181,12 +181,5 @@ export class KickstartStack extends cdk.Stack {
       description: props.targetEnv
     });
     api.root.addMethod("ANY")
-
-    new ec2.Instance(this, 'Instance1', {
-      vpc: this.vpc,
-      instanceName: `Ec2-${props.targetEnv}`,
-      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
-      machineImage: new ec2.AmazonLinuxImage()
-    });
   }
 }

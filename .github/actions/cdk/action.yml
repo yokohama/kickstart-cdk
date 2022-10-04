@@ -17,15 +17,6 @@ runs:
   steps:
     - uses: actions/checkout@v3
 
-    - name: Check
-      shell: bash
-      run: |
-        echo '###'
-        echo ${{ inputs.aws_access_key_id }}
-        echo ${{ inputs.aws_secret_access_key }}
-        echo ${{ inputs.aws_region }}
-        echo '###'
-
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:

@@ -181,6 +181,7 @@ Resources
 [+] AWS::IAM::InstanceProfile Instance1/InstanceProfile Instance1InstanceProfileC04770B7 
 [+] AWS::EC2::Instance Instance1 Instance14BC3991D 
 ```
+<a id="kickstart-ckd-10-3" />
 
 ### 3. 変更をaws上のlocalにデプロイする
 ```
@@ -225,4 +226,94 @@ $aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" 
 
 # localが作成されている
 "arn:aws:iam::xxxxx:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
+```
+<a id="kickstart-ckd-10-5" />
+
+### 5. 変更をaws上のdevにデプロイする
+```
+$ git add .
+$ git commit -m 'ec2追加'
+$ git push origin development
+$ git pull
+```
+
+<a id="kickstart-cdk-10-6" />
+
+### 6. GitHub上でActionsが動き、aws上のdevスタックにデプロイが始まります。
+
+<img src="https://user-images.githubusercontent.com/1023421/193759086-4a22f3da-2c8f-4aa4-80fd-ce22bda21780.png" widht="400" />
+
+### 7. ec2がdevスタックに追加されたことを確認する
+```
+$ aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-dev-Instance1InstanceProfileC04770B7-LQChub2Xg1Yg"
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
+```
+
+<a id="kickstart-ckd-10-8" />
+
+### 8. 変更をaws上のprodにデプロイする
+1. githubの、kickstart-cdkにアクセス
+2. `Pull requests`をクリックして、`New Pull request`ボタンをクリック
+3. mergeを、main <= developmentにセレクトボックスで選択
+4. `Create pull request`ボタンをクリック
+
+<img src="https://user-images.githubusercontent.com/1023421/193760354-f6cf8667-b82d-4b63-a17f-e1090a9181f0.png" width="400" />
+
+5. Titleを入力して、`Create pull request`ボタンをクリック
+
+<img src="https://user-images.githubusercontent.com/1023421/193761031-ddae623b-956a-4a17-ab51-032ea30d1ec7.png" width="400" />
+
+6. `Merget pull request`ボタンをクリック
+7. `Confirm merge`ボタンをクリック
+
+<img src="https://user-images.githubusercontent.com/1023421/193761326-4bfdf6f5-86f7-4aef-a67d-cb94308927c7.png" width="400" />
+
+### 9. GitHub上でActionsが動き、aws上のprodスタックにデプロイが始まります。
+- [10-6](https://github.com/yokohama/kickstart-cdk#kickstart-cdk-10-6)同様に、GitHubのActionsからデプロイの進行の確認ができます。
+
+### 10. ec2がprodスタックに追加されたことを確認する
+```
+$ aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-dev-Instance1InstanceProfileC04770B7-LQChub2Xg1Yg"
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-prod-Instance1InstanceProfileC04770B7-yysjMAivwvEW"
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
+```
+
+### 11. 追加したEc2を削除する
+1. lib/kickstart-stack.tsから先程追加したコードを削除する。
+
+```
+$diff --git a/lib/kickstart-stack.ts b/lib/kickstart-stack.ts
+
+index af9ebe8..4d90f2f 100644
+--- a/lib/kickstart-stack.ts
++++ b/lib/kickstart-stack.ts
+@@ -181,12 +181,5 @@ export class KickstartStack extends cdk.Stack {
+       description: props.targetEnv
+     });
+     api.root.addMethod("ANY")
+-
+-    new ec2.Instance(this, 'Instance1', {
+-      vpc: this.vpc,
+-      instanceName: `Ec2-${props.targetEnv}`,
+-      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
+-      machineImage: new ec2.AmazonLinuxImage()
+-    });
+   }
+ }
+```
+
+### 12. 変更をaws上のlocalにデプロイする
+- [10-3](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-3)を参照
+
+### 13. 変更をaws上のdevにデプロイする
+- [10-5](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-5)を参照
+
+### 13. 変更をaws上のprodにデプロイする
+- [10-8](https://github.com/yokohama/kickstart-cdk#kickstart-ckd-10-8)を参照
+
+### 14. 全て空になっていることを確認
+```
+$ aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
 ```
