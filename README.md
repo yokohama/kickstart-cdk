@@ -117,9 +117,9 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy Kick
 <img src="https://user-images.githubusercontent.com/1023421/193505698-0176358c-fc48-40ae-9d7c-c861bd7cfb97.png" width="400" />
 
 ## 9. API Gatewayの初期化
-- このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)でAPI Gatewayの初期化まで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
+- このチュートリアルから始めた方は、[kickstart-api](https://github.com/yokohama/kickstart-api)に移動して、API Gatewayの初期化まで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
 
-- [kickstart-cdk](https://github.com/yokohama/kickstart-api)から来た方は、[API Gatewayの初期化](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻り完了させてください。終わりましたら指示に従い、`10. インフラ更新のデプロイ`に進めます。
+- [kickstart-api](https://github.com/yokohama/kickstart-api)から来た方は、[API Gatewayの初期化](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻り、API Gatewayの初期化を進めることができます。初期化が終わりましたら`10. インフラ更新のデプロイ`に進めます。
 
 ## 10. インフラ更新のデプロイ
 
