@@ -173,7 +173,7 @@ Security Group Changes
 (NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
 
 Parameters
-[+] Parameter SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:C96584B6-F00A-464E-AD19-53AFF4B05118.Parameter SsmParameterValueawsserviceamiamazonlinuxlatestamznamihvmx8664gp2C96584B6F00A464EAD1953AFF4B05118Parameter: {"Type":"AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>","Default":"/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"}
+[+] Parameter SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:xxxxx {"Type":"AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>","Default":"/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"}
 
 Resources
 [+] AWS::EC2::SecurityGroup Instance1/InstanceSecurityGroup Instance1InstanceSecurityGroup50841F79 
@@ -193,17 +193,17 @@ $FIREBASE_PROJECT_ID=kickstart-1ce52 cdk deploy --require-approval never Kicksta
 ✨  Deployment time: 1.91s
 
 Outputs:
-EcrStack-local.ExportsOutputFnGetAttEcrF2C6ABFCArnB1FA55B1 = arn:aws:ecr:ap-northeast-1:465254350166:repository/ecr-local
+EcrStack-local.ExportsOutputFnGetAttEcrF2C6ABFCArnB1FA55B1 = arn:aws:ecr:ap-northeast-1:xxxxx:repository/ecr-local
 EcrStack-local.ExportsOutputRefEcrF2C6ABFC130D1B67 = ecr-local
 Stack ARN:
-arn:aws:cloudformation:ap-northeast-1:465254350166:stack/EcrStack-local/f8de3970-427a-11ed-ab0f-061d01a901ef
+arn:aws:cloudformation:ap-northeast-1:xxxxx:stack/EcrStack-local/f8de3970-427a-11ed-ab0f-061d01a901ef
 
 ✨  Total time: 5.31s
 
 KickstartStack-local
 KickstartStack-local: deploying...
-[0%] start: Publishing 67b8aa84d30725ed7f5d7dcb31c075e7becd076006991ed05e553822fc2fb390:current_account-current_region
-[100%] success: Published 67b8aa84d30725ed7f5d7dcb31c075e7becd076006991ed05e553822fc2fb390:current_account-current_region
+[0%] start: Publishing xxxxx
+[100%] success: Published xxxxx
 KickstartStack-local: creating CloudFormation changeset...
 
  ✅  KickstartStack-local
@@ -213,7 +213,7 @@ KickstartStack-local: creating CloudFormation changeset...
 Outputs:
 KickstartStack-local.ApiEndpoint4F160690 = https://fh3ao3lhll.execute-api.ap-northeast-1.amazonaws.com/prod/
 Stack ARN:
-arn:aws:cloudformation:ap-northeast-1:465254350166:stack/KickstartStack-local/dc2d2c90-430c-11ed-b103-06eeb60d75c5
+arn:aws:cloudformation:ap-northeast-1:xxxxx:stack/KickstartStack-local/dc2d2c90-430c-11ed-b103-06eeb60d75c5
 
 ✨  Total time: 266.91s
 ```
@@ -224,5 +224,5 @@ arn:aws:cloudformation:ap-northeast-1:465254350166:stack/KickstartStack-local/dc
 $aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
 
 # localが作成されている
-"arn:aws:iam::465254350166:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
 ```
