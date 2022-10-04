@@ -10,6 +10,7 @@
 7. aws上にECRのリポジトリ( local / dev / prod )作成
 8. インフラ変更を構築する
 9. API Gatewayの初期化
+10. インフラ更新のデプロイ
 
 ## 1. 前提
 - [こちら](https://github.com/yokohama/kickstart#kickstart-1)で、aws cliのクレデンシャル情報がセットされている必要が有ります。
@@ -118,4 +119,110 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy Kick
 ## 9. API Gatewayの初期化
 - このチュートリアルから始めた方は、[kickstart-cdk](https://github.com/yokohama/kickstart-api)でAPI Gatewayの初期化まで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
 
-- [kickstart-cdk](https://github.com/yokohama/kickstart-api)から来た方は、[API Gatewayの初期化](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻り完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
+- [kickstart-cdk](https://github.com/yokohama/kickstart-api)から来た方は、[API Gatewayの初期化](https://github.com/yokohama/kickstart-api#kickstart-api-5-2)に戻り完了させてください。終わりましたら指示に従い、`10. インフラ更新のデプロイ`に進めます。
+
+## 10. インフラ更新のデプロイ
+
+### 1. ec2をaws上のlocalに追加してみる
+- lib/kickstart-tack.tsに、以下のコードを追記して下さい。
+
+```
+$ diff --git a/lib/kickstart-stack.ts b/lib/kickstart-stack.ts
+
+diff --git a/lib/kickstart-stack.ts b/lib/kickstart-stack.ts
+index 4d90f2f..af9ebe8 100644
+--- a/lib/kickstart-stack.ts
++++ b/lib/kickstart-stack.ts
+@@ -181,5 +181,12 @@ export class KickstartStack extends cdk.Stack {
+       description: props.targetEnv
+     });
+     api.root.addMethod("ANY")
++
++    new ec2.Instance(this, 'Instance1', {
++      vpc: this.vpc,
++      instanceName: `Ec2-${props.targetEnv}`,
++      instanceType: ec2.InstanceType.of(ec2.InstanceClass.T2, ec2.InstanceSize.MICRO),
++      machineImage: new ec2.AmazonLinuxImage()
++    });
+   }
+ }
+```
+
+### 2. diffコマンドでaws上の構成変更の確認
+- 先程のコードの追記により、aws上でのインフラ構成の変更セットが確認できます。
+
+```
+$FIREBASE_PROJECT_ID=kickstart-1ce52 cdk diff KickstartStack-local                 
+
+Including dependency stacks: EcrStack-local
+Stack EcrStack-local
+There were no differences
+Stack KickstartStack-local
+IAM Statement Changes
+┌───┬───────────────────────────────┬────────┬────────────────┬───────────────────────────────┬───────────┐
+│   │ Resource                      │ Effect │ Action         │ Principal                     │ Condition │
+├───┼───────────────────────────────┼────────┼────────────────┼───────────────────────────────┼───────────┤
+│ + │ ${Instance1/InstanceRole.Arn} │ Allow  │ sts:AssumeRole │ Service:ec2.${AWS::URLSuffix} │           │
+└───┴───────────────────────────────┴────────┴────────────────┴───────────────────────────────┴───────────┘
+Security Group Changes
+┌───┬────────────────────────────────────────────┬─────┬────────────┬─────────────────┐
+│   │ Group                                      │ Dir │ Protocol   │ Peer            │
+├───┼────────────────────────────────────────────┼─────┼────────────┼─────────────────┤
+│ + │ ${Instance1/InstanceSecurityGroup.GroupId} │ Out │ Everything │ Everyone (IPv4) │
+└───┴────────────────────────────────────────────┴─────┴────────────┴─────────────────┘
+(NOTE: There may be security-related changes not in this list. See https://github.com/aws/aws-cdk/issues/1299)
+
+Parameters
+[+] Parameter SsmParameterValue:--aws--service--ami-amazon-linux-latest--amzn-ami-hvm-x86_64-gp2:xxxxx {"Type":"AWS::SSM::Parameter::Value<AWS::EC2::Image::Id>","Default":"/aws/service/ami-amazon-linux-latest/amzn-ami-hvm-x86_64-gp2"}
+
+Resources
+[+] AWS::EC2::SecurityGroup Instance1/InstanceSecurityGroup Instance1InstanceSecurityGroup50841F79 
+[+] AWS::IAM::Role Instance1/InstanceRole Instance1InstanceRoleBC4D05C6 
+[+] AWS::IAM::InstanceProfile Instance1/InstanceProfile Instance1InstanceProfileC04770B7 
+[+] AWS::EC2::Instance Instance1 Instance14BC3991D 
+```
+
+### 3. 変更をaws上のlocalにデプロイする
+```
+$FIREBASE_PROJECT_ID=kickstart-1ce52 cdk deploy --require-approval never KickstartStack-local
+
+# 成功するとこんな感じ
+
+ ✅  EcrStack-local (no changes)
+
+✨  Deployment time: 1.91s
+
+Outputs:
+EcrStack-local.ExportsOutputFnGetAttEcrF2C6ABFCArnB1FA55B1 = arn:aws:ecr:ap-northeast-1:xxxxx:repository/ecr-local
+EcrStack-local.ExportsOutputRefEcrF2C6ABFC130D1B67 = ecr-local
+Stack ARN:
+arn:aws:cloudformation:ap-northeast-1:xxxxx:stack/EcrStack-local/f8de3970-427a-11ed-ab0f-061d01a901ef
+
+✨  Total time: 5.31s
+
+KickstartStack-local
+KickstartStack-local: deploying...
+[0%] start: Publishing xxxxx
+[100%] success: Published xxxxx
+KickstartStack-local: creating CloudFormation changeset...
+
+ ✅  KickstartStack-local
+
+✨  Deployment time: 263.52s
+
+Outputs:
+KickstartStack-local.ApiEndpoint4F160690 = https://fh3ao3lhll.execute-api.ap-northeast-1.amazonaws.com/prod/
+Stack ARN:
+arn:aws:cloudformation:ap-northeast-1:xxxxx:stack/KickstartStack-local/dc2d2c90-430c-11ed-b103-06eeb60d75c5
+
+✨  Total time: 266.91s
+```
+
+### 4. ec2が追加されたことを確認する
+
+```
+$aws ec2 describe-instances --filter "Name=instance-state-name, Values=running" | jq '.Reservations[].Instances[].IamInstanceProfile.Arn'
+
+# localが作成されている
+"arn:aws:iam::xxxxx:instance-profile/KickstartStack-local-Instance1InstanceProfileC04770B7-bRnupRBOU3Dd"
+```
