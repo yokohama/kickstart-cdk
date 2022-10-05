@@ -12,6 +12,7 @@ import {
   aws_secretsmanager as secretmanager,
   aws_apigateway as apigateway,
   aws_elasticloadbalancingv2 as elbv2,
+  SecretValue,
 } from 'aws-cdk-lib'
 
 import { StackPropsType } from './types/TargetEnvType';
@@ -22,7 +23,7 @@ export class KickstartStack extends cdk.Stack {
   constructor(scope: Construct, id: string, props: StackPropsType) {
     super(scope, id, props);
     
-    const rdsDeleteAutomatedBackups = props.targetEnv == ('local' || 'dev')
+    const rdsDeleteAutomatedBackups = props.targetEnv === ('local' || 'dev')
     
     // VPC
     this.vpc = new ec2.Vpc(this, 'Vpc', {
@@ -89,12 +90,33 @@ export class KickstartStack extends cdk.Stack {
       vpc: this.vpc,
       containerInsights: true,
     });
-    
+
+    // RAILS_MASTER_KEY Secrets Manager
+    const railsSecret = new secretmanager.Secret(this, 'RailsSecret', {
+      secretName: `rails-master-key-${props.targetEnv}`,
+      secretObjectValue: {
+        railsMasterKey: SecretValue.unsafePlainText('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+      }
+    })
+
     // ECS Task Definition
     const taskDefinition = new ecs.FargateTaskDefinition(this, 'TaskDefinition', {
       family: `task-${props.targetEnv}`
     })
 
+    let taskDefinitionSecrets: {[key: string]: ecs.Secret} = {
+      'DATABASE_PASSWORD': ecs.Secret.fromSecretsManager(
+        secret, 
+        'password'
+      ),
+    } 
+    if (props.targetEnv === 'prod') {
+      taskDefinitionSecrets.RAILS_MASTER_KEY = ecs.Secret.fromSecretsManager(
+        railsSecret, 
+        'railsMasterKey'
+      )
+    }
+    
     taskDefinition.addContainer('Container', {
       containerName: `Container-${props.targetEnv}`,
       image: ecs.ContainerImage.fromEcrRepository(props.repository, 'latest'),
@@ -111,9 +133,13 @@ export class KickstartStack extends cdk.Stack {
         DATABASE_USER: props.dbUser,
         FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID!
       },
+      /*
       secrets: {
-        'DATABASE_PASSWORD': ecs.Secret.fromSecretsManager(secret, 'password')
+        'DATABASE_PASSWORD': ecs.Secret.fromSecretsManager(secret, 'password'),
+        'RAILS_MASTER_KEY': ecs.Secret.fromSecretsManager(railsSecret, 'railsMasterKey')
       },
+      */
+      secrets: taskDefinitionSecrets
     })
     .addPortMappings({
       protocol: ecs.Protocol.TCP,
