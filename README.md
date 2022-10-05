@@ -116,6 +116,41 @@ $ FIREBASE_PROJECT_ID=＜プロジェクトID＞ TARGET_ENV=prod cdk deploy Kick
 - 成功するとこんな感じになります。
 <img src="https://user-images.githubusercontent.com/1023421/193505698-0176358c-fc48-40ae-9d7c-c861bd7cfb97.png" width="400" />
 
+### 3. prodの環境だけデプロイは成功してもfargateのコンテナ起動は失敗し続けます。
+
+- ecsの画面
+
+<img src="https://user-images.githubusercontent.com/1023421/193970854-3992f2c8-b897-40c5-9e32-0292bc544d93.png" width="400" />
+
+- fargateのログ
+```
+$ cd ./kickstart-server
+$ ./ops/rails-log.sh prod
+```
+
+<img src="https://user-images.githubusercontent.com/1023421/193971000-d7bc9381-01b0-46fc-917e-099d0690d744.png" width="400" />
+
+- 原因は、prod（本番スタック）のRailsは、productionモードで動くため、`secret_key_base`の設定が必要です。
+
+### 4. secret_key_baseの設定をする
+- 既に、[kickstart-server](https://github.com/yokohama/kickstart-server#kickstart-server-6)で、imageの作成が行われていることが前提となります。
+
+- secret_key_base(master.key)を登録する
+```
+$ cd ./kickstart-server
+$ ./ops/egist_rails_master_key.sh
+```
+
+- 本番(prod)の、fargateのサービスを更新する
+```
+$ TARGET_ENV=prod ./ops/update_ecr_service.sh
+```
+
+- kicstart-cdkに戻ります
+```
+cd ./kickstart-cdk
+```
+
 ## 9. API Gatewayの初期化
 - このチュートリアルから始めた方は、[kickstart-api](https://github.com/yokohama/kickstart-api)に移動して、API Gatewayの初期化まで完了させてください。終わりましたら指示に従い、10のデプロイに進めます。
 
