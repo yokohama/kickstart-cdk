@@ -27,7 +27,8 @@
 ### 1. githubからforkする。
 fork先名は解りやすく同じ名前にして下さい。もし変更する場合は、以降`kickstart-cdk`を`変更した名前`に読み替えて作業をおこなって下さい。
 
-### 2. forkした先のリポジトリに、`development`ブランチを作成して下さい。
+### 2. ブランチの作成
+forkした先のリポジトリに、`development`ブランチを作成して下さい。
 
 ## 3. FirebaseのプロジェクトIDの確認
 - kickstart-frontを構築していない方は先に、[こちら](https://github.com/yokohama/kickstart-front)でフロントの構築をしてください。
