@@ -138,7 +138,7 @@ $ ./ops/rails-log.sh prod
 - secret_key_base(master.key)を登録する
 ```
 $ cd ./kickstart-server
-$ ./ops/egist_rails_master_key.sh
+$ ./ops/regist_rails_master_key.sh
 ```
 
 - 本番(prod)の、fargateのサービスを更新する
