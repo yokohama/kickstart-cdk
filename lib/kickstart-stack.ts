@@ -24,7 +24,7 @@ export class KickstartStack extends cdk.Stack {
     super(scope, id, props);
     
     const rdsDeleteAutomatedBackups = props.targetEnv === ('local' || 'dev')
-    
+
     // VPC
     this.vpc = new ec2.Vpc(this, 'Vpc', {
       cidr: props.vpcSubnet,
@@ -91,14 +91,6 @@ export class KickstartStack extends cdk.Stack {
       containerInsights: true,
     });
 
-    // RAILS_MASTER_KEY Secrets Manager
-    const railsSecret = new secretmanager.Secret(this, 'RailsSecret', {
-      secretName: `rails-master-key-${props.targetEnv}`,
-      secretObjectValue: {
-        railsMasterKey: SecretValue.unsafePlainText('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
-      }
-    })
-
     // ECS Task Definition
     const taskDefinition = new ecs.FargateTaskDefinition(this, 'TaskDefinition', {
       family: `task-${props.targetEnv}`
@@ -110,7 +102,15 @@ export class KickstartStack extends cdk.Stack {
         'password'
       ),
     } 
+
+    // RAILS_MASTER_KEY Secrets Manager for prod only
     if (props.targetEnv === 'prod') {
+      const railsSecret = new secretmanager.Secret(this, 'RailsSecret', {
+        secretName: `rails-master-key-${props.targetEnv}`,
+        secretObjectValue: {
+          railsMasterKey: SecretValue.unsafePlainText('xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
+        }
+      })
       taskDefinitionSecrets.RAILS_MASTER_KEY = ecs.Secret.fromSecretsManager(
         railsSecret, 
         'railsMasterKey'
@@ -133,12 +133,6 @@ export class KickstartStack extends cdk.Stack {
         DATABASE_USER: props.dbUser,
         FIREBASE_PROJECT_ID: process.env.FIREBASE_PROJECT_ID!
       },
-      /*
-      secrets: {
-        'DATABASE_PASSWORD': ecs.Secret.fromSecretsManager(secret, 'password'),
-        'RAILS_MASTER_KEY': ecs.Secret.fromSecretsManager(railsSecret, 'railsMasterKey')
-      },
-      */
       secrets: taskDefinitionSecrets
     })
     .addPortMappings({
